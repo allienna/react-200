@@ -18,12 +18,22 @@ export function personReceived(person) {
   };
 }
 
-export const peopleRequestedUsing = fetchPeople => () =>
-  (dispatch) => {
-    // what should this thunk do ?
-  };
+export const peopleRequestedUsing = fetchPeople => () => dispatch => {
+  dispatch({ type: PEOPLE_REQUESTED });
+  return fetchPeople()
+    .then(people => {
+      dispatch(peopleReceived(people));
+      return true;
+    })
+    .catch(error => false);
+};
 
-export const personUpdatedUsing = updatePerson => (id, patch) =>
-  (dispatch) => {
-    // what should this thunk do ?
-  };
+export const personUpdatedUsing = updatePerson => (id, patch) => dispatch => {
+  dispatch({ type: PERSON_UPDATED });
+  return updatePerson(id, patch)
+    .then(person => {
+      dispatch(personReceived(person));
+      return true;
+    })
+    .catch(error => false);
+};

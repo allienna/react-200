@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadPeople: () => dispatch(peopleRequested())
+  onMounted: () => dispatch(peopleRequested())
 });
 
 const enhance = compose(

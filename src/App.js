@@ -10,7 +10,7 @@ import Spinner from './components/Spinner';
 
 class App extends Component {
   componentDidMount() {
-    this.props.loadPeople()
+    this.props.onMounted()
     .then(success => !success && alert('could not load people :('));
   }
 
